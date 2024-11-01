@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "316852388071",
+    "project_id": "water-reminder-app-9582a",
+    "storage_bucket": "water-reminder-app-9582a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316852388071:android:9be5ae0858ab4142976242",
+        "android_client_info": {
+          "package_name": "com.appvista.aquaaura"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316852388071-36boehu2b5ds42gbci9c4l5tq43lh5l4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appvista.aquaaura",
+            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+          }
+        },
+        {
+          "client_id": "316852388071-ph05nnru2b31ls79v161c7o4o29d4906.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGmBrLx8N0C29mgxEaYmzM2AURDTl3Yi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316852388071-ph05nnru2b31ls79v161c7o4o29d4906.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "316852388071-0fivlaq6nsqfjqpcct2uods607omsai2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.waterReminderApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
