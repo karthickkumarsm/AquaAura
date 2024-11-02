@@ -172,7 +172,7 @@ class About extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: const Text(
-          "Version : 1.1.0\n\nContact us : appvista2024@gmail.com\n\nCompany : AppVista\n\nDeveloper : Karthick Kumar SM",
+          "Version : 1.0.0\n\nContact us : appvista2024@gmail.com\n\nCompany : AppVista\n\nDeveloper : Karthick Kumar SM",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
@@ -197,7 +197,7 @@ class Info extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: const Text(
-            "1.Enter your entry of drinking by pressing '+' icon.\n\n2.Delete your entry of drinking by pressing '-' icon.\n\n3.Click on 'History' icon to view your drinking time log.\n\n4.Click on 'Alarm' icon to set timer for notification to remember you to have some water.\n\n5.You can set reminder upto 3 hours to remember you to drink water.\n\n6.If you haven't scheduled your reminder notification schedule, then by default you will receive reminder notification for every 1 hour.\n\n7.You can also turn off the reminder notification when you are going to sleep or in a busy situation.\n\n8.Once you turn on the reminder notification, the previous schedule will be resumed.\n\n9.Click on 'user' icon to view icon settings.\n\n10.Click on 'Hamburger' icon to see menu.\n\n11.Click on 'Settings' to access settings option.",
+            "1.Enter your entry of drinking by pressing '+' icon.\n\n2.Delete your entry of drinking by pressing '-' icon.\n\n3.Click on 'History' icon to view your drinking time log.\n\n4.Click on 'Alarm' icon to set timer for notification to remember you to have some water.\n\n5.You can set reminder upto 3 hours to remember you to drink water.\n\n6.You can also turn off the reminder notification when you are going to sleep or in a busy situation.\n\n7.Once you turn on the reminder notification, the previous schedule will be resumed.\n\n8.Click on 'user' icon to view Accounts settings.\n\n9.Click on 'Hamburger' icon to see menu.\n\n10.Click on 'Settings' to access settings option.\n\n11.Click on 'About' to know about the app.\n\n12.Click on your profile picture to change your profile picture.",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),

@@ -2,26 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
+import 'package:water_reminder_app/services/firebase_auth_service.dart';
+
 
 class LoginScreen extends StatelessWidget {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuthService _authService = FirebaseAuthService();
 
   LoginScreen({super.key});
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-      final UserCredential userCredential = await _auth.signInWithCredential(
-        GoogleAuthProvider.credential(
-          accessToken: googleAuth?.accessToken,
-          idToken: googleAuth?.idToken,
-        ),
-      );
-
-      // Navigate back to SplashScreen to check user status
+      await _authService.signInWithGoogle();
       Navigator.pushReplacementNamed(context, '/');
     } catch (error) {
       print('Login error: $error');

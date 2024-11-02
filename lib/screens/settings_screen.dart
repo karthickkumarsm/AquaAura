@@ -4,8 +4,10 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:water_reminder_app/services/firebase_auth_service.dart';
 import '../services/firestore_service.dart';
 import '../models/user_model.dart';
 
@@ -20,6 +22,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final FirestoreService _firestoreService = FirestoreService();
+  final FirebaseAuthService _authService = FirebaseAuthService();
   UserModel? user;
   String? newGoal;
   String? profilePicUrl;
@@ -85,10 +88,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.pushReplacementNamed(context, '/login');
-    AwesomeNotifications().cancelAll();
+ Future<void> signOut() async {
+    await _authService.signOut();
+    if (mounted) {
+      setState(() {
+        user = null; // Clear user data
+      });
+      Navigator.pushReplacementNamed(context, '/login');
+      AwesomeNotifications().cancelAll();
+    }
   }
 
  Future<void> deleteUser() async {
@@ -116,28 +124,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
   // If the user confirmed the deletion
   if (confirmDelete == true) {
     try {
-      // Delete user data from Firestore
+      print("deleting user");
       await _firestoreService.deleteUser(widget.userId);
-
-      // Delete the user from Firebase Authentication
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
+        await reauthenticateUser();
         await user.delete();
         AwesomeNotifications().cancelAll();
-      }
+         await _authService.signOut();
 
-      // Navigate to the login page after successful deletion
+      }
       Navigator.pushReplacementNamed(context, '/login');
     } catch (e) {
-      // Handle errors if any occur during deletion
       print("An error occurred while deleting the account: $e");
     }
   } else {
-    // User canceled the deletion, no further action needed
     print("User canceled account deletion.");
   }
 }
 
+Future<void> reauthenticateUser() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    await user.reauthenticateWithCredential(credential);
+  }
+}
 
   @override
   Widget build(BuildContext context) {

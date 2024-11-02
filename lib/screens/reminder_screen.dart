@@ -90,7 +90,6 @@ class _ReminderScreenState extends State<ReminderScreen> {
         fullScreenIntent: true,
         customSound: 'resource://raw/water',
         criticalAlert: true,
-        duration: Duration(seconds: 8),
       ),
       schedule: NotificationInterval(
        interval: Duration(minutes: (intervalHours * 60) + intervalMinutes),
