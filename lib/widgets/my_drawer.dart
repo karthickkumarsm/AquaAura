@@ -172,7 +172,7 @@ class About extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: const Text(
-          "Version : 1.0.0\n\nContact us : appvista2024@gmail.com\n\nCompany : AppVista\n\nDeveloper : Karthick Kumar SM",
+          "Version : 1.0.0\n\nContact us : appvista2024@gmail.com\n\nCompany : AppVista\n\nDeveloper : Karthick Kumar SM\n\nCopyRight : 2024\n\nDisclaimer : This app doesn't misuse any personal data of the user. It is just a reminder app to remind you to drink water. You can also delete your data by clicking on 'Delete Account' in the settings.\n\nP.S. We setted the amount of water you enter as 150 ml by default for now.",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
