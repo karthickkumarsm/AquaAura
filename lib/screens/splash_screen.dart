@@ -6,6 +6,7 @@ import 'home_screen.dart';
 import 'profile_setup_screen.dart';
 import '../services/firestore_service.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,6 +17,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _isNavigating = false; // Flag to prevent multiple navigations
+  StreamSubscription<List<ConnectivityResult>>? _subscription;
 
   void checkUserStatus() async {
     if (_isNavigating) return; // Exit if already navigating
@@ -32,13 +34,16 @@ class _SplashScreenState extends State<SplashScreen> {
           content: Text('Please turn on the internet to use this app.'),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _isNavigating = false; // Reset the flag
+                checkUserStatus(); // Recheck the connectivity status
+              },
+              child: Text('Refresh'),
             ),
           ],
         ),
       );
-      _isNavigating = false; // Reset the flag
       return;
     }
 
@@ -63,6 +68,20 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     checkUserStatus();
+    _subscription = Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+      if (result.isNotEmpty && result.first != ConnectivityResult.none) {
+        // Internet connection restored
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => SplashScreen()),
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 
   @override
